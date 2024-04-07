@@ -1,6 +1,8 @@
 import defaultUserPic from '../assets/user.png';
 import newsImage from '../assets/editorsInsight1.png';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 const NewsCard = ({ singleNews }) => {
     const { title, author, image_url, details, rating, total_view } = singleNews;
@@ -27,5 +29,8 @@ const NewsCard = ({ singleNews }) => {
         </div >
     );
 };
+
+
+
 
 export default NewsCard;

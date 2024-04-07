@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import userDefaultPic from '../../assets/user.png';
 const Navbar = () => {
     const links = <>
-        <Link className="mr-4" to='/home'>Home</Link>
-        <Link className="mr-4" to='/about'>About</Link>
-        <Link className="mr-4" to='/career'>Career</Link>
+        <NavLink className="mr-4" to='/home'>Home</NavLink>
+        <NavLink className="mr-4" to='/about'>About</NavLink>
+        <NavLink className="mr-4" to='/career'>Career</NavLink>
     </>
     return (
         <div>
