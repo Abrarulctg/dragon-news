@@ -5,18 +5,22 @@ import Navbar from "../../shared/Navbar/Navbar";
 import RightSideNav from "../../shared/RightSideNav/RightSideNav";
 import BreakingNews from "./BreakingNews";
 import NewsCard from "../NewsCard";
-
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
-    const [news, setNews] = useState([]);
+    // const [news, setNews] = useState([]);
 
-    useEffect(() => {
-        fetch('news.json')
-            .then(res => res.json())
-            .then(data => {
-                setNews(data)
-            })
-    }, []);
+    const newsData = useLoaderData();
+    console.log(newsData);
+
+
+    // useEffect(() => {
+    //     fetch('news.json')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setNews(data)
+    //         })
+    // }, []);
 
     return (
         <div>
@@ -31,7 +35,7 @@ const Home = () => {
                     <h2 className="text-2xl font-bold">Dragon News Home</h2>
                     <div>
                         {
-                            news.map(singleNews => <NewsCard singleNews={singleNews} key={singleNews._id}></NewsCard>)
+                            newsData.map(singleNews => <NewsCard singleNews={singleNews} key={singleNews._id}></NewsCard>)
                         }
                     </div>
                 </div>

@@ -1,11 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import userDefaultPic from '../../assets/user.png';
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
     const links = <>
-        <NavLink className="mr-4" to='/home'>Home</NavLink>
+        <NavLink className="mr-4" to='/'>Home</NavLink>
         <NavLink className="mr-4" to='/about'>About</NavLink>
         <NavLink className="mr-4" to='/career'>Career</NavLink>
+        <NavLink className="mr-4" to='/login'>Login</NavLink>
     </>
+
+    const handleSignOut = () => {
+        logOut()
+            .then(res => console.log("Sign Out Successful", res))
+            .catch(err => console.log(err))
+    }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -26,24 +36,27 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src={userDefaultPic} />
+
+
+                    {
+                        user ? <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img alt="Tailwind CSS Navbar component" src={userDefaultPic} />
+                                </div>
                             </div>
-                        </div>
-                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
-                    </div>
-                    <Link to="/login"> <a className="btn">Login</a></Link>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li>
+                                    <a className="justify-between">
+                                        Profile
+                                        <span className="badge">New</span>
+                                    </a>
+                                </li>
+                                <li><a>Settings</a></li>
+                                <li><a onClick={handleSignOut}>Sigh Out</a></li>
+                            </ul>
+                        </div> : <Link to="/login"> <a className="btn">Login</a></Link>
+                    }
                 </div>
             </div>
         </div>
